@@ -1,0 +1,25 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+.DS_Store
+
+.gradle/
+build/
+--config/
+
+*.log
+*.bak
+tmp.*
+
+*.iml
+.idea/*
+!.idea/externalDependencies.xml
+!.idea/vcs.xml
+!.idea/bashsupport_project.xml
+!.idea/runConfigurations/
+!.idea/dictionaries/
+!.idea/codeStyles/
+!.idea/inspectionProfiles/
+!.idea/compiler.xml
+!.idea/gradle.xml
+!.idea/kotlinc.xml
+!.idea/kotlinScripting.xml
