@@ -32,7 +32,7 @@ class ServiceManager(override val kodein: Kodein) : KodeinAware,
     check(services.isNotEmpty()) { "There are no services to run" }
 
     val time = measureTimeMillis {
-      println("services: $services")
+      logger.info { "services: $services" }
       services.forEach { service -> treeRun(service) }
       (services as ArrayList<*>).removeAll(servicesFinalizedAfterStart)
       servicesFinalizedAfterStart.onEach {

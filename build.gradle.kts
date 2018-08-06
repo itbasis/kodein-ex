@@ -19,8 +19,8 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin.BUILD_TASK_NAME
 import org.gradle.language.base.plugins.LifecycleBasePlugin.ASSEMBLE_TASK_NAME
 
 tasks.withType<Wrapper> {
-  distributionType = Wrapper.DistributionType.BIN
-  gradleVersion = "4.8.1"
+  distributionType = Wrapper.DistributionType.ALL
+  gradleVersion = "4.9"
 }
 
 buildscript {
