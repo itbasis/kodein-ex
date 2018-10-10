@@ -2,9 +2,7 @@ import com.github.breadmoirai.GithubReleaseExtension
 import com.github.breadmoirai.GithubReleasePlugin
 import com.github.breadmoirai.GithubReleaseTask
 import com.gradle.scan.plugin.BuildScanExtension
-import io.gitlab.arturbosch.detekt.DetektCheckTask
 import io.gitlab.arturbosch.detekt.DetektPlugin
-import io.gitlab.arturbosch.detekt.extensions.DEFAULT_PROFILE_NAME
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.jetbrains.kotlin.gradle.dsl.Coroutines
 import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
@@ -20,7 +18,7 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin.ASSEMBLE_TASK_NAME
 
 tasks.withType<Wrapper> {
   distributionType = Wrapper.DistributionType.ALL
-  gradleVersion = "4.9"
+  gradleVersion = "4.10.2"
 }
 
 buildscript {
@@ -34,7 +32,6 @@ buildscript {
   dependencies {
     classpath(kotlin("gradle-plugin", kotlinVersion))
     classpath("gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:latest.release")
-    classpath("gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:latest.release")
     classpath("gradle.plugin.com.github.breadmoirai:github-release:latest.release")
   }
 }
@@ -72,19 +69,13 @@ subprojects {
   }
 
   configure<DetektExtension> {
-    this.profile(DEFAULT_PROFILE_NAME, Action {
-      config = rootDir.resolve("detekt-config.yml")
-    })
+    config = files(rootDir.resolve("detekt-config.yml"))
   }
 
   afterEvaluate {
     plugins.withType(JavaBasePlugin::class.java) {
       configure<JavaPluginConvention> {
         sourceCompatibility = JavaVersion.VERSION_1_8
-      }
-      tasks.withType(DetektCheckTask::class.java) {
-        dependsOn(tasks.withType(Test::class.java))
-        tasks.getByName(JavaBasePlugin.CHECK_TASK_NAME).dependsOn(this)
       }
     }
 

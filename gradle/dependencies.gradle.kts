@@ -19,7 +19,7 @@ configurations.all {
         "org.jetbrains.kotlin"      -> useVersion(kotlinVersion)
         "org.slf4j"                 -> useVersion("1.7.25")
         "junit"                     -> useVersion("4.12")
-        "io.kotlintest"             -> useVersion("3.1.6")
+        "io.kotlintest"             -> useVersion("+")
 //        "org.kodein.di"             -> useVersion("5.1.0")
 //        "com.github.lewik.klogging" -> useVersion("1.2.41")
 //        "com.github.lewik"          -> useTarget("com.github.lewik.klogging:${requested.name}:$kloggingVersion")
