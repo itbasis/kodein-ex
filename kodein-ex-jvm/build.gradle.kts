@@ -4,7 +4,7 @@ apply {
   plugin<KotlinPlatformJvmPlugin>()
 }
 
-val kloggingVersion: String by project
+val kotlinLoggingVersion: String by project
 val kodeinVersion: String by project
 
 dependencies {
@@ -13,10 +13,6 @@ dependencies {
   "implementation"(kotlin("stdlib-jdk8"))
   "implementation"(kotlin("reflect"))
 
-  "compile"(group = "com.github.lewik.klogging", name = "klogging.jvm", version = kloggingVersion) {
-    exclude(group = "com.github.lewik")
-  }
-
-  "compile"(group = "org.kodein.di", name = "kodein-di-generic-jvm", version = kodeinVersion)
-//  "compile"(group = "org.kodein.di", name = "kodein-di-conf-jvm", version = kodeinVersion)
+  "compile"("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
+  "compile"("org.kodein.di:kodein-di-generic-jvm:$kodeinVersion")
 }

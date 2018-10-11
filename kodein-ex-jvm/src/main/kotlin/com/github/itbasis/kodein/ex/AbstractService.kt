@@ -1,3 +1,6 @@
 package com.github.itbasis.kodein.ex
 
-abstract class AbstractService : Service
+import mu.KLogging
+
+abstract class AbstractService : Service,
+                                 KLogging()

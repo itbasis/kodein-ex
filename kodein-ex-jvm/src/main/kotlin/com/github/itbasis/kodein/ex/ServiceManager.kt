@@ -1,8 +1,6 @@
 package com.github.itbasis.kodein.ex
 
-import klogging.KLogger
-import klogging.KLoggers
-import klogging.WithLogging
+import mu.KLogging
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.allInstances
@@ -11,10 +9,7 @@ import kotlin.reflect.jvm.jvmErasure
 import kotlin.system.measureTimeMillis
 
 class ServiceManager(override val kodein: Kodein) : KodeinAware,
-                                                    WithLogging {
-
-  override val logger: KLogger
-    get() = KLoggers.logger(this)
+                                                    KLogging() {
 
   private val services: List<Service>
     get() {

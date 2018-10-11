@@ -4,7 +4,6 @@ val kotlinVersion: String by extra
 val kloggingVersion: String by extra
 
 repositories {
-  mavenLocal()
   jcenter()
   mavenCentral()
   maven(url = "https://jitpack.io")
@@ -16,13 +15,10 @@ configurations.all {
 
     eachDependency {
       when (requested.group) {
-        "org.jetbrains.kotlin"      -> useVersion(kotlinVersion)
-        "org.slf4j"                 -> useVersion("1.7.25")
-        "junit"                     -> useVersion("4.12")
-        "io.kotlintest"             -> useVersion("+")
-//        "org.kodein.di"             -> useVersion("5.1.0")
-//        "com.github.lewik.klogging" -> useVersion("1.2.41")
-//        "com.github.lewik"          -> useTarget("com.github.lewik.klogging:${requested.name}:$kloggingVersion")
+        "org.jetbrains.kotlin" -> useVersion(kotlinVersion)
+        "org.slf4j"            -> useVersion("+")
+        "junit"                -> useVersion("4.+")
+        "io.kotlintest"        -> useVersion("+")
       }
     }
   }

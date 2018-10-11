@@ -4,10 +4,10 @@ apply {
   plugin<KotlinPlatformCommonPlugin>()
 }
 
-val kloggingVersion: String by project
+val kotlinLoggingVersion: String by project
 val kodeinVersion: String by project
 
 dependencies {
-  "compile"(group = "com.github.lewik.klogging", name = "klogging.common", version = kloggingVersion)
-  "compile"(group = "org.kodein.di", name = "kodein-di-core-common", version = kodeinVersion)
+  "compile"("io.github.microutils:kotlin-logging-common:$kotlinLoggingVersion")
+  "compile"("org.kodein.di:kodein-di-core-common:$kodeinVersion")
 }

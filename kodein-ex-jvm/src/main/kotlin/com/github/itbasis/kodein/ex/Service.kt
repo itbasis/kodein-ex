@@ -1,16 +1,11 @@
 package com.github.itbasis.kodein.ex
 
-import klogging.KLogger
-import klogging.KLoggers
-import klogging.WithLogging
+import mu.KLoggable
 import org.kodein.di.bindings.ScopeCloseable
 import kotlin.reflect.KClass
 
 interface Service : ScopeCloseable,
-                    WithLogging {
-  override val logger: KLogger
-    get() = KLoggers.logger(this)
-
+                    KLoggable {
   @Throws(Throwable::class)
   fun start()
 

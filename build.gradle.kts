@@ -17,7 +17,7 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin.BUILD_TASK_NAME
 import org.gradle.language.base.plugins.LifecycleBasePlugin.ASSEMBLE_TASK_NAME
 
 tasks.withType<Wrapper> {
-  distributionType = Wrapper.DistributionType.ALL
+  distributionType = Wrapper.DistributionType.BIN
   gradleVersion = "4.10.2"
 }
 
