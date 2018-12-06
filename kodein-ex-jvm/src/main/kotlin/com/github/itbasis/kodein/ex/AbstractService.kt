@@ -1,6 +1,7 @@
 package com.github.itbasis.kodein.ex
 
-import mu.KLogging
+import klog.KLoggerHolder
+import klog.WithLogging
 
 abstract class AbstractService : Service,
-                                 KLogging()
+                                 WithLogging by KLoggerHolder()

@@ -1,6 +1,7 @@
 package com.github.itbasis.kodein.ex
 
-import mu.KLogging
+import klog.KLoggerHolder
+import klog.WithLogging
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.allInstances
@@ -9,7 +10,7 @@ import kotlin.reflect.jvm.jvmErasure
 import kotlin.system.measureTimeMillis
 
 class ServiceManager(override val kodein: Kodein) : KodeinAware,
-                                                    KLogging() {
+                                                    WithLogging by KLoggerHolder() {
 
   private val services: List<Service>
     get() {
@@ -27,7 +28,7 @@ class ServiceManager(override val kodein: Kodein) : KodeinAware,
     check(services.isNotEmpty()) { "There are no services to run" }
 
     val time = measureTimeMillis {
-      logger.info { "services: $services" }
+      log.info { "services: $services" }
       services.forEach { service -> treeRun(service) }
       (services as ArrayList<*>).removeAll(servicesFinalizedAfterStart)
       servicesFinalizedAfterStart.onEach {
@@ -36,7 +37,7 @@ class ServiceManager(override val kodein: Kodein) : KodeinAware,
         System.gc()
       }
     }
-    logger.info { "Started within $time milliseconds" }
+    log.info { "Started within $time milliseconds" }
   }
 
   fun stop() {
@@ -44,18 +45,18 @@ class ServiceManager(override val kodein: Kodein) : KodeinAware,
       stopServices(servicesFinalizedAfterStart)
       stopServices(servicesStarted)
     }
-    logger.info { "Started within $time milliseconds" }
+    log.info { "Started within $time milliseconds" }
   }
 
   private fun stopServices(services: MutableList<Service>) {
     services.onEach { service ->
       val serviceClassName = service::class.simpleName
       try {
-        logger.info { "Service '$serviceClassName': stopping..." }
+        log.info { "Service '$serviceClassName': stopping..." }
         service.stop()
-        logger.info { "Service '$serviceClassName': stopped" }
+        log.info { "Service '$serviceClassName': stopped" }
       } catch (e: Throwable) {
-        logger.error(e) { "Service '$serviceClassName': stop fail" }
+        log.error(e) { "Service '$serviceClassName': stop fail" }
       }
     }.clear()
   }
@@ -68,7 +69,7 @@ class ServiceManager(override val kodein: Kodein) : KodeinAware,
 
     val serviceClassName = service::class.simpleName
     try {
-      logger.info { "Service '$serviceClassName': starting..." }
+      log.info { "Service '$serviceClassName': starting..." }
       service.start()
 
       when (service.finalizeAfterStart) {
@@ -76,9 +77,9 @@ class ServiceManager(override val kodein: Kodein) : KodeinAware,
         else -> servicesStarted.add(service)
       }
 
-      logger.info { "Service '$serviceClassName': started" }
+      log.info { "Service '$serviceClassName': started" }
     } catch (e: Throwable) {
-      logger.error(e) { "Service '$serviceClassName': start fail" }
+      log.error(e) { "Service '$serviceClassName': start fail" }
       stop()
       return false
     }

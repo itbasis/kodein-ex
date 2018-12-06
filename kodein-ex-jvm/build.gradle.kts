@@ -4,15 +4,24 @@ apply {
   plugin<KotlinPlatformJvmPlugin>()
 }
 
-val kotlinLoggingVersion: String by project
-val kodeinVersion: String by project
+val kotlinVersion = rootProject.extra["kotlin.version"] as String
+val klogVersion = rootProject.extra["klog.version"] as String
+val kodeinVersion= rootProject.extra["kodein.version"] as String
+val kotlintestVersion = extra["kotlintest.version"] as String
+val slf4jVersion = extra["slf4j.version"] as String
 
 dependencies {
-  "compile"(project(":kodein-ex-common"))
+  "expectedBy"(project(":kodein-ex-common"))
 
-  "implementation"(kotlin("stdlib-jdk8"))
-  "implementation"(kotlin("reflect"))
+  "implementation"(kotlin("stdlib-jdk8", kotlinVersion))
+  "implementation"(kotlin("reflect", kotlinVersion))
 
-  "compile"("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
-  "compile"("org.kodein.di:kodein-di-generic-jvm:$kodeinVersion")
+  "implementation"("com.github.lewik.klog:klog-jvm:$klogVersion")
+  "implementation"("org.kodein.di:kodein-di-generic-jvm:$kodeinVersion")
+
+  "testImplementation"("org.slf4j:slf4j-simple:$slf4jVersion")
+  "testImplementation"(kotlin("test-junit5", kotlinVersion))
+  "testImplementation"("io.kotlintest:kotlintest-extensions-system:$kotlintestVersion")
+  "testImplementation"("io.kotlintest:kotlintest-assertions-arrow:$kotlintestVersion")
+  "testImplementation"("io.kotlintest:kotlintest-runner-junit4:$kotlintestVersion")
 }
