@@ -13,11 +13,11 @@ val slf4jVersion = extra["slf4j.version"] as String
 dependencies {
   "expectedBy"(project(":kodein-ex-common"))
 
-  "implementation"(kotlin("stdlib-jdk8", kotlinVersion))
-  "implementation"(kotlin("reflect", kotlinVersion))
+  "compile"(kotlin("stdlib-jdk8", kotlinVersion))
+  "compile"(kotlin("reflect", kotlinVersion))
 
-  "implementation"("com.github.lewik.klog:klog-jvm:$klogVersion")
-  "implementation"("org.kodein.di:kodein-di-generic-jvm:$kodeinVersion")
+  "compile"("com.github.lewik.klog:klog-jvm:$klogVersion")
+  "compile"("org.kodein.di:kodein-di-generic-jvm:$kodeinVersion")
 
   "testImplementation"("org.slf4j:slf4j-simple:$slf4jVersion")
   "testImplementation"(kotlin("test-junit5", kotlinVersion))
